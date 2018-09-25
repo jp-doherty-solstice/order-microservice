@@ -75,7 +75,7 @@ public class OrderService {
         List<LineItemSummary> summaries = new ArrayList<>();
         for (LineItem item : lineItems) {
             LineItemSummary summary = new LineItemSummary();
-            String productName = productService.getProductNameFromId(item.getProductId());
+            String productName = productService.getName(item.getProductId());
             summary.setProductName(productName);
             summary.setQuantity(item.getQuantity());
             summaries.add(summary);
