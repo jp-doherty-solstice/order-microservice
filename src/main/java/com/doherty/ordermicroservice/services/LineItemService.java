@@ -24,10 +24,18 @@ public class LineItemService {
     public LineItemSummary getLineItemSummary(Long id) {
         LineItem lineItem = lineItemRepository.getOne(id);
         LineItemSummary summary = new LineItemSummary();
-        String productName = productService.getProductNameFromId(lineItem.getProductId());
+        String productName = productService.getName(lineItem.getProductId());
         summary.setProductName(productName);
         summary.setQuantity(lineItem.getQuantity());
         return summary;
+    }
+
+    public Double calculateTotalPrice(Long id) {
+        LineItem lineItem = lineItemRepository.getOne(id);
+        Double price = productService.getPrice(lineItem.getProductId());
+        Double totalPrice = price * lineItem.getQuantity();
+        lineItem.setTotalPrice(totalPrice);
+        return lineItemRepository.save(lineItem).getTotalPrice();
     }
 
 }

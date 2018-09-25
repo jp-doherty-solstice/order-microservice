@@ -41,8 +41,7 @@ public class LineItem {
         return productId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductId(Long productId) { this.productId = productId;
     }
 
     public OrderDetail getOrderDetail() {

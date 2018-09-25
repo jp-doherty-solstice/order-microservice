@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "product-service")
 public interface ProductService {
 
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-    public String getProductNameFromId(@PathVariable(value="id") Long id);
+    @RequestMapping(value = "/product/{id}/name", method = RequestMethod.GET)
+    public String getName(@PathVariable(value="id") Long id);
+
+    @RequestMapping(value = "/product/{id}/price", method = RequestMethod.GET)
+    public Double getPrice(@PathVariable(value="id") Long id);
 
 }

@@ -21,4 +21,9 @@ public class LineItemController {
         return lineItemService.getLineItemSummary(id);
     }
 
+    @RequestMapping(value = "/lineItems/{id}/calculatePrice", method = RequestMethod.GET)
+    public Double calculateTotalPrice(@PathVariable("id") Long id) {
+        return lineItemService.calculateTotalPrice(id);
+    }
+
 }
