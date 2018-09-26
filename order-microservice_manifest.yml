@@ -1,0 +1,12 @@
+applications:
+- name: order-microservice
+  path: ./build/libs/order-microservice-0.0.1-SNAPSHOT.jar
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  routes:
+  - route: order-microservice-surprised-kookaburra.cfapps.io
+  services:
+  - order-mysql
+  - service-registry
+  stack: cflinuxfs2
