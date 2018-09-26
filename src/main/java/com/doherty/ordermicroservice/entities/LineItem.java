@@ -37,6 +37,10 @@ public class LineItem {
         return lineItemId;
     }
 
+    public void setLineItemId(long lineItemId) {
+        this.lineItemId = lineItemId;
+    }
+
     public Long getProductId() {
         return productId;
     }
