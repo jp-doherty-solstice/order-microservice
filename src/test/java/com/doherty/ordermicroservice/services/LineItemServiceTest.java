@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -50,33 +51,31 @@ public class LineItemServiceTest {
         return lineItem;
     }
 
-//    @Test
-//    public void getLineItemSummary_ReturnsCorrectSummary() {
-//        LineItem lineItem = new LineItem();
-//        lineItem.setLineItemId(5);
-//        lineItem.setQuantity(8);
-//        when(lineItemRepository.getOne(any(Long.class)))
-//                .thenReturn(lineItem);
-//        when(productService.getName(any(Long.class)))
-//                .thenReturn("basketball");
-//        LineItemSummary foundSummary = lineItemService.getLineItemSummary(5L);
-//        assertEquals("basketball", foundSummary.getProductName());
-//        assertEquals(8, foundSummary.getQuantity());
-//    }
+    @Test
+    public void getLineItemSummary_ReturnsCorrectSummary() {
+        LineItem lineItem = new LineItem();
+        lineItem.setQuantity(8);
+        when(lineItemRepository.getOne(any(Long.class)))
+                .thenReturn(lineItem);
+        when(productService.getName(null))
+                .thenReturn("basketball");
+        LineItemSummary foundSummary = lineItemService.getLineItemSummary((long)5);
+        assertEquals("basketball", foundSummary.getProductName());
+        assertEquals(8, foundSummary.getQuantity());
+    }
 
-//    @Test
-//    public void calculateTotalPrice_ReturnsExpectedDouble() {
-//        LineItem lineItem = new LineItem();
-//        lineItem.setLineItemId(5);
-//        lineItem.setQuantity(8);
-//        when(lineItemRepository.getOne(any(Long.class)))
-//                .thenReturn(lineItem);
-//        when(productService.getPrice(any(Long.class)))
-//                .thenReturn(74.32);
-//        when(lineItemRepository.save(any(LineItem.class)))
-//                .thenReturn(lineItem);
-//        Double totalPrice = lineItemService.calculateTotalPrice(5L);
-//        assertEquals(new Double(594.56), totalPrice);
-//    }
+    @Test
+    public void calculateTotalPrice_ReturnsExpectedDouble() {
+        LineItem lineItem = new LineItem();
+        lineItem.setQuantity(8);
+        when(lineItemRepository.getOne(any(Long.class)))
+                .thenReturn(lineItem);
+        when(productService.getPrice(null))
+                .thenReturn(74.32);
+        when(lineItemRepository.save(any(LineItem.class)))
+                .thenReturn(lineItem);
+        Double totalPrice = lineItemService.calculateTotalPrice(5L);
+        assertEquals(new Double(594.56), totalPrice);
+    }
 
 }
