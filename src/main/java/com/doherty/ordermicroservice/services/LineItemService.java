@@ -6,6 +6,9 @@ import com.doherty.ordermicroservice.repositories.LineItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Service
 public class LineItemService {
 
@@ -34,7 +37,11 @@ public class LineItemService {
         LineItem lineItem = lineItemRepository.getOne(id);
         Double price = productService.getPrice(lineItem.getProductId());
         Double totalPrice = price * lineItem.getQuantity();
-        lineItem.setTotalPrice(totalPrice);
+        Double truncatedPrice = BigDecimal
+                .valueOf(totalPrice)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+        lineItem.setTotalPrice(truncatedPrice);
         return lineItemRepository.save(lineItem).getTotalPrice();
     }
 
