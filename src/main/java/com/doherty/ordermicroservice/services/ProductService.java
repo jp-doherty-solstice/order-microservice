@@ -1,12 +1,13 @@
 package com.doherty.ordermicroservice.services;
 
+import com.doherty.ordermicroservice.fallbacks.ProductFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "product-microservice")
+@FeignClient(name = "product-microservice", fallback = ProductFallback.class)
 @Component
 public interface ProductService {
 
